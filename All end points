@@ -1,0 +1,377 @@
+Here's a detailed **API documentation** for your **Contract Management Microservice**.
+
+---
+
+## 📝 **Base URL**
+```
+http://localhost:8080
+```
+
+---
+
+## 📌 **1. Clients API**
+### ➤ **Create a Client**
+```http
+POST /clients
+```
+**Request Body:**
+```json
+{
+  "clientName": "ABC Corp",
+  "businessType": "IT Services"
+}
+```
+
+✅ **Response:**
+```json
+{
+  "clientId": 1,
+  "clientName": "ABC Corp",
+  "businessType": "IT Services"
+}
+```
+
+---
+
+### ➤ **Get All Clients**
+```http
+GET /clients
+```
+✅ **Response:**
+```json
+[
+  {
+    "clientId": 1,
+    "clientName": "ABC Corp",
+    "businessType": "IT Services"
+  },
+  {
+    "clientId": 2,
+    "clientName": "XYZ Ltd",
+    "businessType": "Finance"
+  }
+]
+```
+
+---
+
+### ➤ **Get a Client by ID**
+```http
+GET /clients/{id}
+```
+✅ **Response:**
+```json
+{
+  "clientId": 1,
+  "clientName": "ABC Corp",
+  "businessType": "IT Services"
+}
+```
+
+---
+
+### ➤ **Update a Client**
+```http
+PUT /clients/{id}
+```
+**Request Body:**
+```json
+{
+  "clientName": "ABC Corporation",
+  "businessType": "Tech"
+}
+```
+✅ **Response:**
+```json
+{
+  "clientId": 1,
+  "clientName": "ABC Corporation",
+  "businessType": "Tech"
+}
+```
+
+---
+
+### ➤ **Delete a Client**
+```http
+DELETE /clients/{id}
+```
+✅ **Response:**  
+```
+204 No Content
+```
+
+---
+
+## 📌 **2. Contracts API**
+### ➤ **Create a Contract**
+```http
+POST /contracts
+```
+**Request Body:**
+```json
+{
+  "client": { "clientId": 1 },
+  "contractType": "Permanent"
+}
+```
+
+✅ **Response:**
+```json
+{
+  "contractId": 1,
+  "client": {
+    "clientId": 1,
+    "clientName": "ABC Corp"
+  },
+  "contractType": "Permanent",
+  "createdAt": "2024-02-01T10:30:00",
+  "updatedAt": "2024-02-01T10:30:00"
+}
+```
+
+---
+
+### ➤ **Get All Contracts**
+```http
+GET /contracts
+```
+✅ **Response:**
+```json
+[
+  {
+    "contractId": 1,
+    "client": {
+      "clientId": 1,
+      "clientName": "ABC Corp"
+    },
+    "contractType": "Permanent",
+    "createdAt": "2024-02-01T10:30:00",
+    "updatedAt": "2024-02-01T10:30:00"
+  }
+]
+```
+
+---
+
+### ➤ **Get a Contract by ID**
+```http
+GET /contracts/{id}
+```
+✅ **Response:**
+```json
+{
+  "contractId": 1,
+  "client": {
+    "clientId": 1,
+    "clientName": "ABC Corp"
+  },
+  "contractType": "Permanent",
+  "createdAt": "2024-02-01T10:30:00",
+  "updatedAt": "2024-02-01T10:30:00"
+}
+```
+
+---
+
+### ➤ **Update a Contract**
+```http
+PUT /contracts/{id}
+```
+**Request Body:**
+```json
+{
+  "contractType": "Routing"
+}
+```
+✅ **Response:**
+```json
+{
+  "contractId": 1,
+  "client": {
+    "clientId": 1,
+    "clientName": "ABC Corp"
+  },
+  "contractType": "Routing",
+  "createdAt": "2024-02-01T10:30:00",
+  "updatedAt": "2024-02-02T11:45:00"
+}
+```
+
+---
+
+### ➤ **Delete a Contract**
+```http
+DELETE /contracts/{id}
+```
+✅ **Response:**  
+```
+204 No Content
+```
+
+---
+
+## 📌 **3. Permanent Contracts API**
+### ➤ **Create a Permanent Contract**
+```http
+POST /permanent-contracts
+```
+**Request Body:**
+```json
+{
+  "contract": { "contractId": 1 },
+  "permanentPercentage": 15.50
+}
+```
+
+✅ **Response:**
+```json
+{
+  "permanentId": 1,
+  "contract": {
+    "contractId": 1,
+    "contractType": "Permanent"
+  },
+  "permanentPercentage": 15.50
+}
+```
+
+---
+
+### ➤ **Get All Permanent Contracts**
+```http
+GET /permanent-contracts
+```
+✅ **Response:**
+```json
+[
+  {
+    "permanentId": 1,
+    "contract": {
+      "contractId": 1,
+      "contractType": "Permanent"
+    },
+    "permanentPercentage": 15.50
+  }
+]
+```
+
+---
+
+### ➤ **Get a Permanent Contract by ID**
+```http
+GET /permanent-contracts/{id}
+```
+✅ **Response:**
+```json
+{
+  "permanentId": 1,
+  "contract": {
+    "contractId": 1,
+    "contractType": "Permanent"
+  },
+  "permanentPercentage": 15.50
+}
+```
+
+---
+
+### ➤ **Delete a Permanent Contract**
+```http
+DELETE /permanent-contracts/{id}
+```
+✅ **Response:**  
+```
+204 No Content
+```
+
+---
+
+## 📌 **4. Permanent MSP API**
+### ➤ **Create a Permanent MSP**
+```http
+POST /permanent-msp
+```
+**Request Body:**
+```json
+{
+  "contract": { "contractId": 1 },
+  "mspName": "XYZ MSP",
+  "mspPercentage": 20.00
+}
+```
+
+✅ **Response:**
+```json
+{
+  "permanentMspId": 1,
+  "contract": {
+    "contractId": 1,
+    "contractType": "Permanent"
+  },
+  "mspName": "XYZ MSP",
+  "mspPercentage": 20.00
+}
+```
+
+---
+
+### ➤ **Get All Permanent MSPs**
+```http
+GET /permanent-msp
+```
+✅ **Response:**
+```json
+[
+  {
+    "permanentMspId": 1,
+    "contract": {
+      "contractId": 1,
+      "contractType": "Permanent"
+    },
+    "mspName": "XYZ MSP",
+    "mspPercentage": 20.00
+  }
+]
+```
+
+---
+
+### ➤ **Get a Permanent MSP by ID**
+```http
+GET /permanent-msp/{id}
+```
+✅ **Response:**
+```json
+{
+  "permanentMspId": 1,
+  "contract": {
+    "contractId": 1,
+    "contractType": "Permanent"
+  },
+  "mspName": "XYZ MSP",
+  "mspPercentage": 20.00
+}
+```
+
+---
+
+### ➤ **Delete a Permanent MSP**
+```http
+DELETE /permanent-msp/{id}
+```
+✅ **Response:**  
+```
+204 No Content
+```
+
+---
+
+## 📌 **Error Responses**
+| Status Code | Message                          |
+|-------------|----------------------------------|
+| `400`       | Bad Request (Invalid input)      |
+| `404`       | Resource Not Found               |
+| `500`       | Internal Server Error            |
+
+---
